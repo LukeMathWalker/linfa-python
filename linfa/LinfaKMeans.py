@@ -3,7 +3,7 @@ from sklearn.utils.validation import check_is_fitted
 from sklearn.metrics.pairwise import euclidean_distances, pairwise_distances_argmin_min
 from sklearn.utils.extmath import row_norms
 import numpy as np
-from linfa_k_means import WrappedKMeans
+from linfa import WrappedKMeans
 
 
 class KMeans(BaseEstimator, ClusterMixin, TransformerMixin):
@@ -36,7 +36,7 @@ class KMeans(BaseEstimator, ClusterMixin, TransformerMixin):
         Number of iterations run.
     Examples
     --------
-    >>> from linfa_k_means import KMeans
+    >>> from linfa import KMeans
     >>> import numpy as np
     >>> X = np.array([[1, 2], [1, 4], [1, 0],
     ...               [10, 2], [10, 4], [10, 0]])

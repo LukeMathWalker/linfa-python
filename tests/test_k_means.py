@@ -4,7 +4,7 @@ import os
 import numpy as np
 
 import pytest
-from linfa_k_means import KMeans
+from linfa import KMeans
 from sklearn.cluster import KMeans as sk_KMeans
 
 @pytest.fixture(scope="session", autouse=True)

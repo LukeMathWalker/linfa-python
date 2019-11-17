@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "linfa_k_means"
+name = "linfa"
 version = "0.1.0"
-authors = ["LukeMathWalker"]
-description = "Python bindings for Rust's linfa crate"
+authors = ["LukeMathWalker", "sitegui", "dunnock"]
+description = "Python bindings for the Rust crate linfa, a Rust machine learning framework."
 
 [tool.poetry.dependencies]
 python = "^3.7"

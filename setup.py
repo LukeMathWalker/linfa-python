@@ -82,9 +82,9 @@ setup(
         "Operating System :: POSIX",
         "Operating System :: MacOS :: MacOS X",
     ],
-    packages=["linfa_k_means"],
+    packages=["linfa"],
     rust_extensions=[RustExtension(
-        "linfa_k_means.linfa_k_means", "Cargo.toml", debug=False)],
+        "linfa.linfa", "Cargo.toml", debug=False)],
     install_requires=install_requires,
     tests_require=tests_require,
     setup_requires=setup_requires,
