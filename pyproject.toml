@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "linfa"
-version = "0.1.0"
-authors = ["LukeMathWalker", "sitegui", "dunnock"]
+version = "0.0.1"
+authors = ["LukeMathWalker <rust@lpalmieri.com>"]
 description = "Python bindings for the Rust crate linfa, a Rust machine learning framework."
 
 [tool.poetry.dependencies]
@@ -13,7 +13,9 @@ scikit-learn = "^0.21.3"
 [tool.poetry.dev-dependencies]
 pytest = "^5.2.4"
 pytest-benchmark = "^3.2.2"
+maturin = "^0.7.7"
+twine = "^2.0.0"
 
 [build-system]
-requires = ["setuptools>=41.0.0", "wheel", "setuptools_rust>=0.10.2", "toml"]
-build-backend = "setuptools.build_meta"
+requires = ["maturin"]
+build-backend = "maturin"

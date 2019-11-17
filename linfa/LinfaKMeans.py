@@ -3,7 +3,7 @@ from sklearn.utils.validation import check_is_fitted
 from sklearn.metrics.pairwise import euclidean_distances, pairwise_distances_argmin_min
 from sklearn.utils.extmath import row_norms
 import numpy as np
-from linfa import WrappedKMeans
+from .linfa import WrappedKMeans
 
 
 class KMeans(BaseEstimator, ClusterMixin, TransformerMixin):

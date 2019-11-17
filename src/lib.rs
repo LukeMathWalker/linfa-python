@@ -83,7 +83,7 @@ impl WrappedKMeans {
 }
 
 #[pymodule]
-fn linfa_k_means(_py: Python<'_>, m: &PyModule) -> PyResult<()> {
+fn linfa(_py: Python<'_>, m: &PyModule) -> PyResult<()> {
     m.add_class::<WrappedKMeans>().unwrap();
 
     Ok(())

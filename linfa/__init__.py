@@ -1,4 +1,3 @@
-from linfa import WrappedKMeans
-from .LinfaKMeans import KMeans
+from .LinfaKMeans import KMeans, WrappedKMeans
 
 __all__ = ["WrappedKMeans", "KMeans"]
