@@ -7,10 +7,12 @@ description = "Python bindings for the Rust crate linfa, a Rust machine learning
 [tool.poetry.dependencies]
 python = "^3.7"
 pip= "^19.3"
-pytest= "^3.5.0"
 setuptools-rust = "^0.10.2"
-pytest-benchmark = "^3.1.1"
 scikit-learn = "^0.21.3"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2.4"
+pytest-benchmark = "^3.2.2"
 
 [build-system]
 requires = ["setuptools>=41.0.0", "wheel", "setuptools_rust>=0.10.2", "toml"]
