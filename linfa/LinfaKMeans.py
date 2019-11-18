@@ -7,7 +7,7 @@ from .linfa import WrappedKMeans
 
 
 class KMeans(BaseEstimator, ClusterMixin, TransformerMixin):
-    """K-Means clustering, using a Rust's ndarray instead of Numpy
+    """K-Means clustering using a Rust's `linfa` crate.
     Parameters
     ----------
     n_clusters : int, optional, default: 8
@@ -25,15 +25,7 @@ class KMeans(BaseEstimator, ClusterMixin, TransformerMixin):
     Attributes
     ----------
     cluster_centers_ : array, [n_clusters, n_features]
-        Coordinates of cluster centers. TODO? If the algorithm stops before fully
-        converging (see ``tol`` and ``max_iter``), these will not be
-        consistent with ``labels_``.
-    labels_ :
-        Labels of each point
-    inertia_ : TODO float
-        Sum of squared distances of samples to their closest cluster center.
-    n_iter_ : TODO int
-        Number of iterations run.
+        Coordinates of cluster centers.
     Examples
     --------
     >>> from linfa import KMeans
@@ -41,16 +33,11 @@ class KMeans(BaseEstimator, ClusterMixin, TransformerMixin):
     >>> X = np.array([[1, 2], [1, 4], [1, 0],
     ...               [10, 2], [10, 4], [10, 0]])
     >>> kmeans = KMeans(n_clusters=2, random_state=0).fit(X)
-    >>> kmeans.labels_
-    array([1, 1, 1, 0, 0, 0], dtype=int32)
     >>> kmeans.predict([[0, 0], [12, 3]])
     array([1, 0], dtype=int32)
     >>> kmeans.cluster_centers_
     array([[10.,  2.],
            [ 1.,  2.]])
-    Notes
-    -----
-    TODO
     """
 
     def __init__(self, n_clusters=8, max_iter=300, tol=1e-4, random_state=None):
@@ -62,10 +49,8 @@ class KMeans(BaseEstimator, ClusterMixin, TransformerMixin):
         """Compute k-means clustering.
         Parameters
         ----------
-        X : array-like, shape=(n_samples, n_features)
-            Training instances to cluster. It must be noted that the data
-            will be converted to C ordering, which will cause a memory
-            copy if the given data is not C-contiguous.
+        X : NumPy array, shape=(n_samples, n_features)
+            Training instances to cluster.
         y : Ignored
             not used, present here for API consistency by convention.
         """
@@ -79,8 +64,8 @@ class KMeans(BaseEstimator, ClusterMixin, TransformerMixin):
         predict(X).
         Parameters
         ----------
-        X : {array-like, sparse matrix}, shape = [n_samples, n_features]
-            New data to transform.
+        X : NumPy array, shape=(n_samples, n_features)
+            Training instances to cluster.
         y : Ignored
             not used, present here for API consistency by convention.
         Returns
@@ -95,8 +80,8 @@ class KMeans(BaseEstimator, ClusterMixin, TransformerMixin):
         Equivalent to fit(X).transform(X), but more efficiently implemented.
         Parameters
         ----------
-        X : {array-like, sparse matrix}, shape = [n_samples, n_features]
-            New data to transform.
+        X : NumPy array, shape=(n_samples, n_features)
+            Training instances to cluster.
         y : Ignored
             not used, present here for API consistency by convention.
         Returns
@@ -112,8 +97,8 @@ class KMeans(BaseEstimator, ClusterMixin, TransformerMixin):
         centers.
         Parameters
         ----------
-        X : {array-like, sparse matrix}, shape = [n_samples, n_features]
-            New data to transform.
+        X : NumPy array, shape=(n_samples, n_features)
+            Training instances to cluster.
         Returns
         -------
         X_new : array, shape [n_samples, k]
@@ -134,8 +119,8 @@ class KMeans(BaseEstimator, ClusterMixin, TransformerMixin):
         the closest code in the code book.
         Parameters
         ----------
-        X : {array-like, sparse matrix}, shape = [n_samples, n_features]
-            New data to predict.
+        X : NumPy array, shape=(n_samples, n_features)
+            Training instances to cluster.
         Returns
         -------
         labels : array, shape [n_samples,]
