@@ -76,9 +76,27 @@ impl WrappedKMeans {
     #[classmethod]
     fn load(_cls: &PyType, path: &PyString) -> PyResult<WrappedKMeans> {
         let path = path.to_string()?;
-        let reader = std::fs::File::open(path.into_owned())?;
-        serde_json::from_reader(reader)
-            .map_err(|e| PyErr::new::<exceptions::Exception, _>(e.to_string()))
+
+        // Try to deserialise as pure Rust model first
+        // (i.e. the model was trained from Rust and saved from Rust using linfa directly)
+        let reader = std::fs::File::open(path.to_string())?;
+        let rust_model: Result<KMeans, _> = serde_json::from_reader(reader);
+        if let Ok(rust_model) = rust_model {
+            // If the deserialisation succeeds, build the wrapper around it
+            let rng = Isaac64Rng::seed_from_u64(42);
+            let hyperparams = rust_model.hyperparameters().to_owned();
+            Ok(WrappedKMeans {
+                model: Some(rust_model),
+                hyperparams,
+                rng
+            })
+        } else {
+            // Otherwise, check if the wrapper can be deserialised from it directly
+            // (i.e. the model was trained from Python and saved from Python)
+            let reader = std::fs::File::open(path.to_string())?;
+            serde_json::from_reader(&reader)
+                .map_err(|e| PyErr::new::<exceptions::Exception, _>(e.to_string()))
+        }
     }
 }
 

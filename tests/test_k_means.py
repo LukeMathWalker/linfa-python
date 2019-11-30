@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 from sklearn.datasets import make_blobs
-import os
-import numpy as np
 
 import pytest
 from linfa import KMeans
@@ -30,4 +28,10 @@ def test_serialisation(make_data):
     path = "testpath"
     model.save(path)
     model2 = KMeans.load(path)
+    print(model.cluster_centers_)
+    print(model2.cluster_centers_)
     assert (model.cluster_centers_ == model2.cluster_centers_).all()
+
+def test_deserialisation_from_rust():
+    path = "tests/rust_model.json"
+    model = KMeans.load(path)
